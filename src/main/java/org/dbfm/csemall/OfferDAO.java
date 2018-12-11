@@ -26,17 +26,18 @@ public class OfferDAO {
 	
 	//query and return a single object
 	public Offer getOffer(String name) {
-		String sqlStatement = "select * from offers where name = ?";
+		String sqlStatement = "select * from offers where name=?";
 		
 		return jdbcTemplate.queryForObject(sqlStatement, new Object[] {name},
 				new RowMapper<Offer>() {
 					public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
 						// TODO Auto-generated method stub
 						Offer offer = new Offer();
+						
 						offer.setId(rs.getInt("id"));
 						offer.setName(rs.getString("name"));
-						offer.setName(rs.getString("email"));
-						offer.setName(rs.getString("text"));
+						offer.setEmail(rs.getString("email"));
+						offer.setText(rs.getString("text"));
 						
 						return offer;
 					}
@@ -44,8 +45,9 @@ public class OfferDAO {
 		);
 	}
 	
+	//query and return multiple objects
 	public List<Offer> getOffers() {
-		String sqlStatement = "select * from offers where name = ?";
+		String sqlStatement = "select * from offers";
 		
 		return jdbcTemplate.query(sqlStatement,
 				new RowMapper<Offer>() {
@@ -54,8 +56,8 @@ public class OfferDAO {
 						Offer offer = new Offer();
 						offer.setId(rs.getInt("id"));
 						offer.setName(rs.getString("name"));
-						offer.setName(rs.getString("email"));
-						offer.setName(rs.getString("text"));
+						offer.setEmail(rs.getString("email"));
+						offer.setText(rs.getString("text"));
 						
 						return offer;
 					}
@@ -82,7 +84,7 @@ public class OfferDAO {
 		
 		String sqlStatement = "update offers set name = ?, email = ?, text = ?, where id = ?";
 		
-		return (jdbcTemplate.update(sqlStatement, new Object[] {name, email, text}) == 1);
+		return (jdbcTemplate.update(sqlStatement, new Object[] {name, email, text, id}) == 1);
 	}
 	
 	public boolean delete(int id) {

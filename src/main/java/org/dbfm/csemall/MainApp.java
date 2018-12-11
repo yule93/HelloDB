@@ -29,7 +29,7 @@ public class MainApp {
 		else
 			System.out.println("Object insert failed.");
 		
-		offer = offerDAO.getOffer("dbfm");
+		offer = offerDAO.getOffer("minjoo");
 		offer.setName("dbfm");
 		if(offerDAO.update(offer)) {
 			System.out.println("Object is updated successfully!");
@@ -37,7 +37,7 @@ public class MainApp {
 		else
 			System.out.println("Object update failed.");
 		
-		offer = offerDAO.getOffer("dbfmdbfm");
+		offer = offerDAO.getOffer("dbfm");
 		System.out.println(offer);
 		
 		if(offerDAO.delete(offer.getId())) {
